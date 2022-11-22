@@ -1,0 +1,53 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+
+{% block body %}
+<div class="container">
+		<div class="main-body">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex flex-column align-items-center text-center">
+								<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+								<div class="mt-3">
+									<h4>{{app.user.fullname}}</h4>
+		  <button class="btn btn-sm btn-primary" type="button"><i class="fas fa-camera"></i>   change profile picture</button>
+								</div>
+							</div>
+							<hr class="my-4">
+							
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+							<h1 class="h4 text-gray-900 mb-4"> Edit Account !</h1>
+						</div>
+				
+						{{ form_start(formProfile) }}
+				
+						{{ form_widget(formProfile) }}
+				
+					
+						
+				
+							<button class="btn  btn-primary btn-block">{{ button_label|default('Save changes') }}</button>
+				
+				
+						
+						{{ form_end(formProfile) }}
+					</div>
+				</div>
+			
+				
+				
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

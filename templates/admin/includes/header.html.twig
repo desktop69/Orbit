@@ -5,7 +5,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('app_dash') }}">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('dashboard_dash') }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -17,16 +17,42 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_dash') }}">
+            <a class="nav-link" href="{{ path('dashboard_dash') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
         <!-- Nav Item - users -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('profile') }} ">
+            <a class="nav-link" href="{{ path('app_profile') }} ">
                 <i class="fas fa-user"></i>
                 <span>Profile</span></a>
         </li>
+
+        <hr class="sidebar-divider">
+<!-- Nav Item - Utilities Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+        aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-user"></i>
+        <span>users</span>
+    </a>
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">humain Ressours groupe</h6>
+            <a class="collapse-item" href="{{ path('app_profile_list') }}">Users</a>
+            <a class="collapse-item" href="#">new Users</a>
+            <a class="collapse-item" href="#">Users</a>
+            <a class="collapse-item" href="#">new Users</a>
+        </div>
+    </div>
+</li>
+
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+
+
         <!-- Nav Item - client -->
         <li class="nav-item">
             <a class="nav-link" href="{{ path('app_cl') }}">
@@ -46,7 +72,7 @@
        
 <div>
        <li class="nav-item">
-            <a class="nav-link" href="{{ path('generate_prices') }}">
+            <a class="nav-link" href="{{ path('app_generateprices') }}">
                 <i class="fas fa-dollar-sign"></i>
                     <span>Generate prices</span></a>
         </li>
@@ -227,7 +253,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{app.user.fullname}}</span>
                             <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                         </a>
                         <!-- Dropdown - User Information -->

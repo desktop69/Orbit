@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @Vich\Uploadable
  */
 class Client
 {
@@ -17,10 +20,7 @@ class Client
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $idClient;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -58,7 +58,7 @@ class Client
     private $phone2;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
     private $birthdate;
 
@@ -73,17 +73,17 @@ class Client
     private $commerce;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $expiredAt;
 
@@ -92,21 +92,25 @@ class Client
      */
     private $userid;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $images;
+
+    /**
+     * @Vich\UploadableField(mapping="client", fileNameProperty="images")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $revenuSalary;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdClient(): ?int
-    {
-        return $this->idClient;
-    }
-
-    public function setIdClient(int $idClient): self
-    {
-        $this->idClient = $idClient;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -193,12 +197,12 @@ class Client
         return $this;
     }
 
-    public function getBirthdate(): ?string
+    public function getBirthdate(): ?\DateTime
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(string $birthdate): self
+    public function setBirthdate(\DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
 
@@ -229,36 +233,36 @@ class Client
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getExpiredAt(): ?\DateTimeImmutable
+    public function getExpiredAt(): ?\DateTime
     {
         return $this->expiredAt;
     }
 
-    public function setExpiredAt(\DateTimeImmutable $expiredAt): self
+    public function setExpiredAt(\DateTime $expiredAt): self
     {
         $this->expiredAt = $expiredAt;
 
@@ -276,4 +280,46 @@ class Client
 
         return $this;
     }
+
+    public function getImages(): ?string
+    {
+        return $this->images;
+    }
+
+    public function setImages(?string $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        // if ($image) {
+        //     // if 'updatedAt' is not defined in your entity, use another property
+        //     $this->updatedAt = new \DateTime('now');
+        // }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function getRevenuSalary(): ?float
+    {
+        return $this->revenuSalary;
+    }
+
+    public function setRevenuSalary(?float $revenuSalary): self
+    {
+        $this->revenuSalary = $revenuSalary;
+
+        return $this;
+    }
+
 }

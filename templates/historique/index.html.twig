@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique{% endblock %}
+
+{% block body %}
+     <div class="container-fluid">
+<a class="btn btn-primary" href="{{ path('performance_show', {'id': perfrmanceShow}) }}"><i class="fas fa-arrow-left"></i>  My performance</a>
+<br>
+<br>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Historique</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Operation</th>
+                <th>Date</th>
+                <th>Earned earnings</th>
+                <th>Remuneration consumed</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for historique in historiques %}
+            <tr>
+                <td>{{ historique.operation }}</td>
+                <td>{{ historique.Date ? historique.Date|date('Y-m-d') : '' }}</td>
+                <td>{{ historique.remAcquis }}</td>
+                <td>{{ historique.remConsommees }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                <td>
+                    <a class="btn btn-success" href="{{ path('historique_edit', {'id': historique.id}) }}"><i class="far fa-edit"></i> Edit</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+            <tr>
+                <th></th><th></th>
+                <th>Total remuneration earned</th>
+                <th>Total remuneration consumed</th>
+            </tr>
+            <tr>
+                <td></td><td></td>
+                <td>{{performance.remTotal}}</td>
+                <td>{{performance.soldSolvable}}</td>
+            </tr>
+            <tr>
+                <th></th><th></th>
+                <th colspan="2">Total remuneration earned</th>
+            </tr>
+            <tr>
+                <td></td><td></td>
+                <td colspan="2">{{performance.soldBiens}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+                </div>
+            </div>
+          </div>
+        </div>
+ 
+        </div>
+
+
+    </div>
+{% endblock %}

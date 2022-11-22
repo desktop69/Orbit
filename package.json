@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "chart-render": "^0.1.9",
+    "npm-watch": "^0.11.0",
+    "watch": "^0.13.0"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
+    "chart.js": "^3.4.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}

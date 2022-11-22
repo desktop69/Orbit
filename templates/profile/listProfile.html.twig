@@ -1,0 +1,73 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}liste users {% endblock %}
+
+{% block body %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste of users </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>img</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>full namme</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        
+                        <tr>
+                            <th>img</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>full namme</th>
+                            <th>Phone</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for Users in users %}
+                        <tr>
+                            <td>  
+   <img src="{{asset('/assets/images/avatar7.png')}}" alt="" class="img-profile rounded-circle" width="50" height="50">
+                            </td>
+                            <td>{{Users.email}}</td>
+                            <td>
+                                <span>
+                                    {% if ( Users.isVerified == 1  ) %}
+                                        <span class=" badge-pill badge-success">Active</span>
+                                    {% else %}
+                                        <span class=" badge-pill badge-danger">Bloque</span>
+                                        {%endif%}
+                                    </span>
+                            </td>
+                            <td>{{Users.fullname}}</td>
+                            <td>{{Users.phone}}</td>
+                           
+                        </tr>
+                      
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+
+
+
+{% endblock body %}

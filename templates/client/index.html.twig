@@ -5,75 +5,107 @@
 
 {% block body %}
 
-	
 
-				<!-- Begin Page Content -->
-				<div
-					class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-{# kamall ekhdem el arry ta3 el client wel button zidek kamal Generate prices w orbite area omoure routs  #}
+	{# kamall ekhdem el arry ta3 el client wel button zidek kamal Generate prices w orbite area omoure routs #}
+
+	<a href="{{path('app_cl_new')}}" class="btn btn-primary btn-icon-split btn-lg">
+		<span class="icon text-white-50">
+			<i class="fa-solid fa-user-plus"></i>
+		</span>
+		<span class="text">Client Data
+		</span>
+	</a>
+
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+
+		<div class="card-header py-3"></div>
+		<div class="card-body">
+
+			<div class="table-responsive">
+				<h3 class="m-0 font-weight-bold text-primary">Customers :</h3>
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>images</th>
+							<th>email</th>
+							<th>f_name</th>
+							<th>l_name</th>
+							<th>cin</th>
+							<th>Adress</th>
+							<th>Status</th>
+							<th>birthdate</th>
+							<th>Date of creation</th>
+							<th>Date expiration</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>id</th>
+							<th>images</th>
+							<th>email</th>
+							<th>f_name</th>
+							<th>l_name</th>
+							<th>cin</th>
+							<th>Adress</th>
+							<th>Status</th>
+							<th>birthdate</th>
+							<th>Date of creation</th>
+							<th>Date expiration</th>
+							<th>Actions</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						{% for Client in client %}
+						<tr>
+							<td>{{Client.id}}</td>
+							<td><img class="img-profile rounded-circle"
+									src="{{ vich_uploader_asset(Client,'imageFile') }}" width="50"
+									height="50"></td>
+							<td>{{Client.email}}</td>
+							<td>{{Client.getFName()}}</td>
+							<td>{{Client.getLName()}}</td>
+							<td>{{Client.cin}}</td>
+							<td>{{Client.adress}}</td>
+
+							<td>
+								<span>
+									{% if ( Client.isActive == 1 ) %}
+									<span class=" badge-pill badge-success">Active</span>
+									{% else %}
+									<span class=" badge-pill badge-danger">Bloque</span>
+									{%endif%}
+								</span>
+							</td>
+							</td>
 
 
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3"></div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
-										</tr>
-									</tfoot>
-									<tbody>
-										<tr>
-											<td>Tiger Nixon</td>
-											<td>System Architect</td>
-											<td>Edinburgh</td>
-											<td>61</td>
-											<td>2011/04/25</td>
-											<td>$320,800</td>
-										</tr>
-										<tr>
-											<td>Garrett Winters</td>
-											<td>Accountant</td>
-											<td>Tokyo</td>
-											<td>63</td>
-											<td>2011/07/25</td>
-											<td>$170,750</td>
-										</tr>
-										<tr>
-											<td>Ashton Cox</td>
-											<td>Junior Technical Author</td>
-											<td>San Francisco</td>
-											<td>66</td>
-											<td>2009/01/12</td>
-											<td>$86,000</td>
-										</tr>
+							<td>{{Client.birthdate|date('d/m/Y')}}</td>
+							<td>{{Client.createdAt|date('d/m/Y')}}</td>
+							<td>{{Client.expiredAt|date('d/m/Y')}}</td>
 
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
+							<td>
+								<a class="btn btn-warning" href="{{ path('app_cl_edit', {'id': Client.id}) }}">
+									<i class="far fa-sm fa-edit"></i>
+									Edit</a>
+								{{ include('client/_delete_form.html.twig') }}
+							</td>
 
-				</div>
-				<!-- /.container-fluid -->
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 
-		
-		{% endblock %}
+</div>
+<!-- /.container-fluid -->
+
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Performance{% endblock %}
+
+{% block body %}
+    
+     <div class="container-fluid">
+     {% if is_granted('ROLE_ADMIN') %}
+     <a class="btn btn-primary" href="{{ path('orbit_show', {'id': performance.user.id}) }}"><i class="fas fa-arrow-left"></i> Orbite Area</a>
+      {% else %}
+    <a class="btn btn-primary" href="{{ path('orbit_index') }}"><i class="fas fa-arrow-left"></i> My Orbite Area</a>
+      {% endif%}
+<br>
+<br>
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">My Performance</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Number of generations accomplished</th>
+                <th>Remuneration monthly</th>
+                <th>Remuneration Total</th>
+                <th>Current balance</th>
+                <th>Date of creation</th>
+                <th>Date expiration</th>
+                
+            </tr>
+        </thead>
+        
+        <tbody>
+    
+            <tr> 
+                <td>
+                {% if performance.priceGns %}
+                {{ performance.priceGns.generation }}
+                {% else %}
+                  0
+                {% endif %}                
+                </td>
+
+                <td>{{ performance.remMonthly }}</td>
+ 
+                <td>{{ performance.remTotal }}</td>
+
+                <td>{{ performance.soldBiens }}</td>
+                
+                <td>{{ performance.user.createdAt|date('d/m/Y') }}</td>
+
+                <td>{{ performance.user.expires|date('d/m/Y') }}</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    
+                </div>
+                <div class="text-center">
+                <a class="btn btn-info" href="{{ path('historique_index', {'id': performance.id}) }}"> <i class="far fa-eye"></i> See the history review</a>
+                </div>
+            </div>
+          </div>
+          
+        </div>
+      {% if is_granted('ROLE_ADMIN') %}
+      <div class="text-center">
+        <a class="btn btn-success" href="{{ path('performance_edit', {'id': performance.id}) }}"><i class="far fa-edit"></i> Edit Generation</a>
+        <a class="btn btn-success" href="{{ path('historique', {'id': performance.id}) }}"><i class="fas fa-plus"></i> New Operation</a>
+      </div>
+      {% endif %} 
+      <br>
+      <br>
+       
+      </div>
+
+    
+
+   
+{% endblock %}
